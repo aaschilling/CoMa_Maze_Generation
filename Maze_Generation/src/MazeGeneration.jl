@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 include("core.jl")
 struct Maze
     nodes::Matrix{Node}
