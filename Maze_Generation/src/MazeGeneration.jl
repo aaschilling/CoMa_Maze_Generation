@@ -20,3 +20,4 @@ width = 2
 x = maze(width, height)
 print(x)
 #Hallo
+#ihr
