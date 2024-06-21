@@ -1,6 +1,7 @@
 
 Programmierprojekt Computerorientierte Mathematik II
-Abgabe: Durch Vorstellung bis zum 05.07.2024
+Abgabe: Durch Vorstellung ab dem 05.07.2024
+
 Hinweis: Das Programmierprojekt wird in Dreiergruppen bearbeitet und bei
 einem Tutor oder Tutorin vorgestellt. Termine für die Vorstellung werden über
 ISIS bekannt gegeben.
