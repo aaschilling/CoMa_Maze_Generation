@@ -2,12 +2,11 @@ include("core.jl")
 include("MazeGeneration.jl")
 
 function solve(maze::Maze)
-    path::Vector{Node}
-    start = maze.start.pos
-    target = maze.target.pos
-    pos = start
+    path = Vector{Node}()
+    pos = maze.start
+    target = maze.target
     new_pos = rand(maze.start.conected)
-    push!(path, pos)
+    push!(path, start)
 
     while pos != target
         while in(new_pos, path)
@@ -17,28 +16,28 @@ function solve(maze::Maze)
 
         push!(path, new_pos)
 
-        if pos[1] != new_pos[1]
-            richtung = pos[1] - new_pos[1] 
+        if pos.pos[1] != new_pos.pos[1]
+            richtung = pos.pos[1] - new_pos.pos[1] 
             if richtung < 0
-                right = (new_pos[1], pos[2] - 1)
-                forward = (new_pos[1]+1, pos[2])
-                left = (new_pos[1], pos[2] + 1)
+                right = (new_pos.pos[1], pos.pos[2] - 1)
+                forward = (new_pos.pos[1]+1, pos.pos[2])
+                left = (new_pos.pos[1], pos.pos[2] + 1)
             else
-                right = (new_pos[1], pos[2] + 1)
-                forward = (new_pos[1]-1, pos[2])
-                left = (new_pos[1], pos[2] - 1)
+                right = (new_pos.pos[1], pos.pos[2] + 1)
+                forward = (new_pos.pos[1]-1, pos.pos[2])
+                left = (new_pos.pos[1], pos.pos[2] - 1)
             end
         end
-        if pos[2] != new_pos[2]
-            richtung = pos[2] - new_pos[2] 
+        if pos.pos[2] != new_pos.pos[2]
+            richtung = pos.pos[2] - new_pos.pos[2] 
             if richtung < 0
-                right = (pos[1] + 1 , new_pos[2])
-                forward = (pos[1], new_pos[2]+1)
-                left = (pos[1] - 1, new_pos[2]) 
+                right = (pos.pos[1] + 1 , new_pos.pos[2])
+                forward = (pos.pos[1], new_pos.pos[2]+1)
+                left = (pos.pos[1] - 1, new_pos.pos[2]) 
             else
-                right = (pos[1] - 1 , new_pos[2])
-                forward = (pos[1], new_pos[2]-1)
-                left = (pos[1] + 1, new_pos[2]) 
+                right = (pos.pos[1] - 1 , new_pos.pos[2])
+                forward = (pos.pos[1], new_pos.pos[2]-1)
+                left = (pos.pos[1] + 1, new_pos.pos[2]) 
             end
         end
 
