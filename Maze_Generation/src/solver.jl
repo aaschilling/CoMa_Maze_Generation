@@ -3,15 +3,20 @@ include("MazeGeneration.jl")
 
 function solve(maze::Maze)
     path = Vector{Node}()
-    pos = maze.start
-    target = maze.target
-    new_pos = rand(maze.start.conected)
+    start = maze.start.pos
+    ziel = maze.target.pos
+    pos = maze.nodes[start[2], start[1]]
+    target = maze.nodes[ziel[2], ziel[1]]
+    next = rand(maze.start.conected)
+    new_pos = maze.nodes[next[2], next[1]]
     push!(path, pos)
 
     while pos != target
-        if !in(path, new_pos)
-            push!(path, new_pos)
+        if path[end] == new_pos
+            pop!(path)
         end
+        
+        push!(path, new_pos)
 
         if pos.pos[1] != new_pos.pos[1]
             richtung = pos.pos[1] - new_pos.pos[1] 
@@ -38,30 +43,15 @@ function solve(maze::Maze)
             end
         end
 
-        if in(right, new_pos.connected.pos)
-            pos = new_pos
-            for node in pos.connected
-                if node.pos === right
-                new_pos = node
-                end
-            end
-        elseif in(forward, new_pos.connected.pos)
-            pos = new_pos
-            for node in pos.connected
-                if node.pos === forward
-                new_pos = node
-                end
-            end
-        elseif in(left, new_pos.connected.pos)
-            pos = new_pos
-            for node in pos.connected
-                if node.pos === left
-                new_pos = node
-                end
-            end
+        if in(right, new_pos.conected)
+            pos, new_pos = new_pos, maze.nodes[right[2], right[1]]
+        elseif in(forward, new_pos.conected)
+            pos, new_pos = new_pos, maze.nodes[forward[2], forward[1]]
+        elseif in(left, new_pos.conected)
+            pos, new_pos = new_pos, maze.nodes[left[2], left[1]]
         else
-            path = path[1:end-2]
-            new_pos = path[-1]
+            pos, new_pos = new_pos, pos
+            pop!(path)
         end
     end
     
@@ -69,5 +59,7 @@ function solve(maze::Maze)
 end
 
 test = maze(3,3)
-rand(test.start.conected)
-solve(test)
+println(test.nodes)
+println(test.start)
+println(test.target)
+println(solve(test))
