@@ -9,15 +9,14 @@ function solve(maze::Maze)
     target = maze.nodes[ziel[2], ziel[1]]
     next = rand(maze.start.conected)
     new_pos = maze.nodes[next[2], next[1]]
-    push!(path, pos)
 
     while pos != target
-        if path[end] == new_pos
+        if !in(pos, path)
+            push!(path, pos)
+        elseif in(pos, path) && in(new_pos, path)
             pop!(path)
-        end
+        end    
         
-        push!(path, new_pos)
-
         if pos.pos[1] != new_pos.pos[1]
             richtung = pos.pos[1] - new_pos.pos[1] 
             if richtung < 0
@@ -51,7 +50,6 @@ function solve(maze::Maze)
             pos, new_pos = new_pos, maze.nodes[left[2], left[1]]
         else
             pos, new_pos = new_pos, pos
-            pop!(path)
         end
     end
     
