@@ -7,25 +7,9 @@ mutable struct Maze
     #path::Union{Vector{Node}, Nothing}
 end
 
-function maze_tree(width::Int, height::Int)
-    #=nodes = []
-    for n in 1:height
-        for m in 1:width
-            push!(nodes, Node((n,m)))
-        end
-    end
-    rand_index = rand(1:length(nodes))=#
-
-#chose a random start for maze genaration and add to visited nodes
-    tree = Node((rand(1:width),rand(1:height)))
-    visited::Vector{Tuple{Int,Int}} = [tree.pos]
-
-    generate_tree(tree,visited,(width,height))
-
-    return tree
-end
 
 function maze(width::Int,height::Int)
+    @assert width*height > 1 "a single field is a boring maze..."
     #generate matrix with nodes whose position are the respective coordinates
     maze = [Node((i,j)) for j=1:height, i=1:width]
     start::Node = rand(maze)
@@ -62,11 +46,12 @@ function generate_matrix(current::Node, visited::Vector{Tuple{Int,Int}}, maze, s
     #traverse deeper
     generate_matrix(next, visited, maze, size)
 
+    #if the backtracking reches this node again check for reachable nodes
     posibilities = neighbours(current,visited,size)
     if length(posibilities) == 0
         return nothing
     end
-    
+    #continue as above with new node
     rand_index = rand(1:length(posibilities))
     next = posibilities[rand_index]
     i_,j_ = next.pos
@@ -79,6 +64,29 @@ function generate_matrix(current::Node, visited::Vector{Tuple{Int,Int}}, maze, s
     
     generate_matrix(next, visited, maze, size)
 
+end
+
+
+
+####################################################################################################
+#######################################Propably useless#############################################
+####################################################################################################
+#=function maze_tree(width::Int, height::Int)
+    #=nodes = []
+    for n in 1:height
+        for m in 1:width
+            push!(nodes, Node((n,m)))
+        end
+    end
+    rand_index = rand(1:length(nodes))=#
+
+#chose a random start for maze genaration and add to visited nodes
+    tree = Node((rand(1:width),rand(1:height)))
+    visited::Vector{Tuple{Int,Int}} = [tree.pos]
+
+    generate_tree(tree,visited,(width,height))
+
+    return tree
 end
 
 #recursive function for the randomised depth-first tree-maze generation
@@ -115,7 +123,5 @@ function generate_tree(tree::Node,visited::Vector{Tuple{Int,Int}},size::Tuple{In
     tree.rightchild = generate_tree(next,visited,size)
 
     return tree
-end
-
-#maze(3,3)
+end=#
 
