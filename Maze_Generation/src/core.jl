@@ -23,4 +23,3 @@ function neighbours(node::Node,visited::Vector{Tuple{Int,Int}},size::Tuple{Int,I
     node.pos[2]+1 <= height && !((node.pos[1],node.pos[2]+1) in visited) ? push!(neighbours, Node((node.pos[1],node.pos[2]+1))) : nothing
     return neighbours
 end
-
