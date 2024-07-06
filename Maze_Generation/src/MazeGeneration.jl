@@ -4,7 +4,7 @@ mutable struct Maze
     start::Node
     target::Node
     #visual::Union{MazeViz, Nothing}
-    #path::Union{Vector{Node}, Nothing}
+    path::Union{Vector{Node}, Nothing}
 end
 
 
@@ -22,7 +22,7 @@ function maze(width::Int,height::Int)
     while start == target
         target = rand(maze)
     end
-   return Maze(maze,start,target)
+   return Maze(maze,start,target, nothing)
 end
 
 #recursive function for the matrix generation of the maze based on random depth-first search
@@ -66,7 +66,7 @@ function generate_matrix(current::Node, visited::Vector{Tuple{Int,Int}}, maze, s
 
 end
 
-
+maze(3,3)
 
 ####################################################################################################
 #######################################Propably useless#############################################

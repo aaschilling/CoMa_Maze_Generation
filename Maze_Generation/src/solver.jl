@@ -55,11 +55,6 @@ function solve(maze::Maze)
         end
     end
     push!(path, pos)
+    maze.path = path
     return path
 end
-
-#test = maze(3,3)
-#println(test.nodes)
-#println(test.start)
-#println(test.target)
-#println(solve(test))
