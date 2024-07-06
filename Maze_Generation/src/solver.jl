@@ -58,8 +58,8 @@ function solve(maze::Maze)
     return path
 end
 
-test = maze(3,3)
-println(test.nodes)
-println(test.start)
-println(test.target)
-println(solve(test))
+#test = maze(3,3)
+#println(test.nodes)
+#println(test.start)
+#println(test.target)
+#println(solve(test))
