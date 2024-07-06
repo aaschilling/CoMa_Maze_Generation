@@ -13,7 +13,8 @@ function solve(maze::Maze)
     while pos != target
         if !in(pos, path)
             push!(path, pos)
-        elseif in(new_pos, path)
+        end
+        if in(new_pos, path)
             pop!(path)
         end    
 
@@ -50,6 +51,7 @@ function solve(maze::Maze)
             pos, new_pos = new_pos, maze.nodes[left[2], left[1]]
         else
             pos, new_pos = new_pos, pos
+            push!(path, pos)
         end
     end
     push!(path, pos)
