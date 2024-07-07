@@ -21,6 +21,7 @@ include("MazeGeneration.jl")
     @testset "solve" begin
         test_maze = maze(10,10)
         solve(test_maze)
+
         @test length(test_maze.path) <= 100
         cohesive::Bool = true
         for i in range(2, 100)
@@ -32,7 +33,6 @@ include("MazeGeneration.jl")
         @test cohesive == true
         has_duplicates = length(test_maze.path) != length(unique(test_maze.path))
         @test has_duplicates == false
-    end
-    
+    end 
 end
 
