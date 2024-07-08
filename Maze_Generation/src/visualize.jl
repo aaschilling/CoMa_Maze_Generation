@@ -37,8 +37,6 @@ function MazeViz(maze::Maze, height::Int, width::Int)
             end
         end
     end
-    
-    #println(maze.nodes[1,4].conected)
     #Herausfinden wo Wände und wo conected, und je nachdem dann Wände rauslöschen
     for i in 1:n
         for j in 1:m
@@ -70,13 +68,35 @@ function MazeViz(maze::Maze, height::Int, width::Int)
             end
         end
     end
+    pfad = [node.pos for node in maze.path]
+    while length(pfad) > 1
+        if pfad[1] != pfad[2]
+            a1, a2 = pfad[1]
+            n1, n2 = pfad[2]
+            akt_j = 2*a1
+            akt_i = 2*a2
+            next_j = 2*n1
+            next_i = 2*n2
+            if akt_i == next_i 
+                if next_j < akt_j 
+                    matrix[akt_j-1,akt_i] = '⇧'
+                else 
+                    matrix[akt_j+1,akt_i] = '⇩'
+                end
+            else
+                if next_i < akt_i
+                    matrix[akt_j,akt_i-1] = '⇦'
+                else 
+                    matrix[akt_j,akt_i+1] = '⇨'
+                end
+            end
+        end
+        popfirst!(pfad)
+    end
     return MazeViz(matrix)
 end
 
-function show_path(maze::Maze, visual::MazeViz)
-    maze.path[1]
-    
-end
+
 #=function show_path(visual::MazeViz, maze::Maze)
     pfad::Vector{Tuple{Int, Int}} = []
     if typeof(maze.path) != Nothing
@@ -95,19 +115,24 @@ function print_maze(maze2::MazeViz)
 end
 
 
-#test = maze(3,3)
-#pfad = solve(test)
-#println(test.start)
-#println(test.target)
-#println(test.nodes)
-#println(test.path)
+test = maze(3,3)
+pfadii = solve(test)
+println(test.start)
+println(test.target)
+println(test.nodes)
+println(test.path)
+print_maze(MazeViz(test, 3,3))
+println(test.path[1].pos)
+println(length(test.path))
+#println(pfad[1])
+
 #println(test)
 #lösungi = solve(test)
 #println(lösungi)
-test = maze(3,3)
-labyrinth = MazeViz(test, 3,3)
+#=test = maze(3,3)
+
 lösung = solve(test)
 weg = show_path(test,labyrinth)
-print_maze(d)
+print_maze(d)=#
 #testii = show_path(d, test)
 #println(testii)
