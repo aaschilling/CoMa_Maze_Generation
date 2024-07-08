@@ -66,6 +66,8 @@ function MazeViz(maze::Maze, height::Int, width::Int)
     return MazeViz(matrix)
 end
 
+
+
 function print_maze(maze2::MazeViz)
     for i in 1:size(maze2.matrix, 1)
         println(String(maze2.matrix[i, :]))
@@ -73,9 +75,9 @@ function print_maze(maze2::MazeViz)
 end
 
 
-test = maze(2,4)
+test = maze(2,3)
 println(test)
-lösungi = solve(test)
-println(lösungi)
-d = MazeViz(test , 2,4)
+#lösungi = solve(test)
+#println(lösungi)
+d = MazeViz(test , 2,3)
 print_maze(d)
