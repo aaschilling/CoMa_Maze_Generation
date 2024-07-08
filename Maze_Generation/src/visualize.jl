@@ -18,7 +18,7 @@ function MazeViz(maze::Maze, height::Int, width::Int)
             end
         end
     end
-    #Herausfinden wo Wände und wo conected, und je nachdem dann Wände rauslöschen
+    #=Herausfinden wo Wände und wo conected, und je nachdem dann Wände rauslöschen
     for i in 1:m
         for j in 1:n
             if matrix[i,j] == 'o'
@@ -48,17 +48,18 @@ function MazeViz(maze::Maze, height::Int, width::Int)
                 end
             end
         end
-    end
+    end=#
     return MazeViz(matrix)
 end
 
-function print_maze(maze::MazeViz)
-    for i in 1:size(maze.matrix, 1)
-        println(String(maze.matrix[i, :]))
+function print_maze(maze2::MazeViz)
+    for i in 1:size(maze2.matrix, 1)
+        println(String(maze2.matrix[i, :]))
     end
 end
 
 
-test = maze(3,3)
-d = MazeViz(test,3,3)
+test = maze(2,3)
+println(test)
+d = MazeViz(test,2,3)
 print_maze(d)
