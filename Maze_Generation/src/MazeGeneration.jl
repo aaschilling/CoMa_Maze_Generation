@@ -8,10 +8,10 @@ mutable struct Maze
 end
 
 
-function maze(width::Int,height::Int)
+function maze(height::Int,width::Int)
     @assert width*height > 1 "a single field is a boring maze..."
     #generate matrix with nodes whose position are the respective coordinates
-    maze = [Node((i,j)) for j=1:height, i=1:width]
+    maze = [Node((i,j)) for i=1:height, j=1:width]
     start::Node = rand(maze)
     visited::Vector{Tuple{Int,Int}} = [start.pos]
     generate_matrix(start, visited, maze, (width,height))
@@ -41,8 +41,8 @@ function generate_matrix(current::Node, visited::Vector{Tuple{Int,Int}}, maze, s
     push!(visited,next.pos)
     deleteat!(posibilities, rand_index)
     #adding reachability to node.connected of the respective nodes
-    push!(maze[j,:][i].conected, next.pos)
-    push!(maze[j_,:][i_].conected, current.pos)
+    push!(maze[i,:][j].conected, next.pos)
+    push!(maze[i_,:][j_].conected, current.pos)
     #traverse deeper
     generate_matrix(next, visited, maze, size)
 
@@ -59,14 +59,14 @@ function generate_matrix(current::Node, visited::Vector{Tuple{Int,Int}}, maze, s
     push!(visited,next.pos)
     deleteat!(posibilities, rand_index)
 
-    push!(maze[j,:][i].conected, next.pos)
-    push!(maze[j_,:][i_].conected, current.pos)
+    push!(maze[i,:][j].conected, next.pos)
+    push!(maze[i_,:][j_].conected, current.pos)
     
     generate_matrix(next, visited, maze, size)
 
 end
 
-maze(3,3)
+#maze(3,3)
 
 ####################################################################################################
 #######################################Propably useless#############################################
