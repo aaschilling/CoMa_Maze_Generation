@@ -14,8 +14,8 @@ end
 #function to generate a list of neighbouring nodes that haven't been visited yet
 function neighbours(node::Node,visited::Vector{Tuple{Int,Int}},size::Tuple{Int,Int})::Vector{Node}
     #println("illegal neighbours (visited): $visited")
-    width = size[1]
-    height = size[2]
+    height = size[1]
+    width = size[2]
     neighbours::Vector{Node} = []
     node.pos[1]-1 >= 1 && !((node.pos[1]-1,node.pos[2]) in visited) ? push!(neighbours, Node((node.pos[1]-1,node.pos[2]))) : nothing
     node.pos[1]+1 <= width && !((node.pos[1]+1,node.pos[2]) in visited) ? push!(neighbours, Node((node.pos[1]+1,node.pos[2]))) : nothing
