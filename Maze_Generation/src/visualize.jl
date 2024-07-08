@@ -1,22 +1,33 @@
 include("MazeGeneration.jl")
 include("core.jl")
+include("solver.jl")
 mutable struct MazeViz
     matrix::Matrix{Char}  
 end
 
 function MazeViz(maze::Maze, height::Int, width::Int)
-    #Matrix mit richtiger Größe und alle als 'x' erstellen
+    #Matrix mit richtiger Größe und alle als '+' erstellen
     n = 2*width+1
     m = 2*height+1
-    value = '+'
-    matrix = fill(value, m, n)
-    #Alle Matrixwerte die aus geradzahligen Ints bestehen werden von '+' zu 'o' -> sie sind die Punkte im Labyrinth
-    # !Ränder und Wände schöner machen in gleicher for Schleife!
+    matrix = fill('+', m, n)
     for i in 1:n
         for j in 1:m
+            #Alle Matrixwerte die aus geradzahligen Ints bestehen werden von '+' zu 'o' -> sie sind die Punkte im Labyrinth
             if i % 2 == 0 && j % 2 == 0
                 matrix[j,i] = 'o'
             end
+            #Außenwände shöner in dem sie jeweilige Striche sind
+            if j == 1 && i != 1 && i != n
+                matrix[j,i] = '-'
+            elseif j == m && i != 1 && i != n
+                matrix[j,i] = '-'
+            elseif i == 1 && j != 1 && j!= m
+                matrix[j,i] = '|'
+            elseif i == n && j != 1 && j!= m
+                matrix[j,i] = '|'
+            end
+            # !Wände schöner machen in gleicher for Schleife!
+
         end
     end
     
@@ -64,5 +75,7 @@ end
 
 test = maze(2,4)
 println(test)
+lösungi = solve(test)
+println(lösungi)
 d = MazeViz(test , 2,4)
 print_maze(d)
