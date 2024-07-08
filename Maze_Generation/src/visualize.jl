@@ -25,17 +25,27 @@ function MazeViz(maze::Maze, height::Int, width::Int)
                 matrix[j,i] = '|'
             elseif i == n && j != 1 && j!= m
                 matrix[j,i] = '|'
+            #Wände schöner machen in gleicher for Schleife
+            elseif j % 2 == 1 && i % 2 == 0
+                matrix[j,i] = '-'
+            elseif j % 2 == 0 && i % 2 == 1
+                matrix[j,i] = '|'
             end
-            # !Wände schöner machen in gleicher for Schleife!
-
+            #Start und Ziel einzeichnen 
+            s1, s2 = maze.start.pos
+            if j == s1*2 && i == s2*2
+                matrix[j,i] = 'S'
+            end
+            t1, t2 = maze.target.pos
+            if j == t1*2 && i == t2*2
+                matrix[j,i] = 'T'
+            end
         end
     end
-    
-    #println(maze.nodes[1,4].conected)
     #Herausfinden wo Wände und wo conected, und je nachdem dann Wände rauslöschen
     for i in 1:n
         for j in 1:m
-            if matrix[j,i] == 'o'
+            if matrix[j,i] == 'o' || matrix[j,i] == 'S' || matrix[j,i] == 'T' 
                 i_durch_2::Int = i/2                                                            #von width
                 j_durch_2::Int = j/2                                                            #von height
                 nachbarn::Vector{Tuple{Int, Int}} = maze.nodes[j_durch_2, i_durch_2].conected
@@ -63,10 +73,37 @@ function MazeViz(maze::Maze, height::Int, width::Int)
             end
         end
     end
+    pfad = [node.pos for node in maze.path]
+    while length(pfad) > 1
+        if pfad[1] != pfad[2]
+            a1, a2 = pfad[1]
+            n1, n2 = pfad[2]
+            akt_j = 2*a1
+            akt_i = 2*a2
+            next_j = 2*n1
+            next_i = 2*n2
+            if akt_i == next_i 
+                if next_j < akt_j 
+                    matrix[akt_j-1,akt_i] = '⇧'
+                else 
+                    matrix[akt_j+1,akt_i] = '⇩'
+                end
+            else
+                if next_i < akt_i
+                    matrix[akt_j,akt_i-1] = '⇦'
+                else 
+                    matrix[akt_j,akt_i+1] = '⇨'
+                end
+            end
+        end
+        popfirst!(pfad)
+    end
     return MazeViz(matrix)
 end
 
 
+#=function show_path(visual::MazeViz, maze::Maze)
+end=#
 
 function print_maze(maze2::MazeViz)
     for i in 1:size(maze2.matrix, 1)
@@ -75,9 +112,24 @@ function print_maze(maze2::MazeViz)
 end
 
 
-test = maze(2,3)
-println(test)
+test = maze(3,3)
+pfadii = solve(test)
+#println(test.start)
+#println(test.target)
+#println(test.nodes)
+#println(test.path)
+print_maze(MazeViz(test, 3,3))
+#println(test.path[1].pos)
+#println(length(test.path))
+#println(pfad[1])
+
+#println(test)
 #lösungi = solve(test)
 #println(lösungi)
-d = MazeViz(test , 2,3)
-print_maze(d)
+#=test = maze(3,3)
+
+lösung = solve(test)
+weg = show_path(test,labyrinth)
+print_maze(d)=#
+#testii = show_path(d, test)
+#println(testii)
