@@ -25,8 +25,13 @@ function MazeViz(maze::Maze, height::Int, width::Int)
                 matrix[j,i] = '|'
             elseif i == n && j != 1 && j!= m
                 matrix[j,i] = '|'
+            #Wände schöner machen in gleicher for Schleife
+            elseif j % 2 == 1 && i % 2 == 0
+                matrix[j,i] = '-'
+            elseif j % 2 == 0 && i % 2 == 1
+                matrix[j,i] = '|'
             end
-            # !Wände schöner machen in gleicher for Schleife!
+            #Start und Ziel einzeichnen 
             s1, s2 = maze.start.pos
             if j == s1*2 && i == s2*2
                 matrix[j,i] = 'S'
@@ -98,14 +103,6 @@ end
 
 
 #=function show_path(visual::MazeViz, maze::Maze)
-    pfad::Vector{Tuple{Int, Int}} = []
-    if typeof(maze.path) != Nothing
-        laenge = length(maze.path)
-        for i in 1:length(maze.path)
-            append!(pfad, maze.path[i])
-        end
-    end
-    return pfad 
 end=#
 
 function print_maze(maze2::MazeViz)
@@ -117,13 +114,13 @@ end
 
 test = maze(3,3)
 pfadii = solve(test)
-println(test.start)
-println(test.target)
-println(test.nodes)
-println(test.path)
+#println(test.start)
+#println(test.target)
+#println(test.nodes)
+#println(test.path)
 print_maze(MazeViz(test, 3,3))
-println(test.path[1].pos)
-println(length(test.path))
+#println(test.path[1].pos)
+#println(length(test.path))
 #println(pfad[1])
 
 #println(test)
