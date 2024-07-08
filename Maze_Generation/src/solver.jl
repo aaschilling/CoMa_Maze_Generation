@@ -5,10 +5,10 @@ function solve(maze::Maze)
     path = Vector{Node}()
     start = maze.start.pos
     ziel = maze.target.pos
-    pos = maze.nodes[start[2], start[1]]
-    target = maze.nodes[ziel[2], ziel[1]]
+    pos = maze.nodes[start[1], start[2]]
+    target = maze.nodes[ziel[1], ziel[2]]
     next = rand(maze.start.conected)
-    new_pos = maze.nodes[next[2], next[1]]
+    new_pos = maze.nodes[next[1], next[2]]
 
     while pos != target
         if !in(pos, path)
@@ -44,11 +44,11 @@ function solve(maze::Maze)
         end
 
         if in(right, new_pos.conected)
-            pos, new_pos = new_pos, maze.nodes[right[2], right[1]]
+            pos, new_pos = new_pos, maze.nodes[right[1], right[2]]
         elseif in(forward, new_pos.conected)
-            pos, new_pos = new_pos, maze.nodes[forward[2], forward[1]]
+            pos, new_pos = new_pos, maze.nodes[forward[1], forward[2]]
         elseif in(left, new_pos.conected)
-            pos, new_pos = new_pos, maze.nodes[left[2], left[1]]
+            pos, new_pos = new_pos, maze.nodes[left[1], left[2]]
         else
             pos, new_pos = new_pos, pos
             push!(path, pos)
