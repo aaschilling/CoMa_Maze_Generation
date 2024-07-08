@@ -27,7 +27,14 @@ function MazeViz(maze::Maze, height::Int, width::Int)
                 matrix[j,i] = '|'
             end
             # !Wände schöner machen in gleicher for Schleife!
-
+            s1, s2 = maze.start.pos
+            if j == s1*2 && i == s2*2
+                matrix[j,i] = 'S'
+            end
+            t1, t2 = maze.target.pos
+            if j == t1*2 && i == t2*2
+                matrix[j,i] = 'T'
+            end
         end
     end
     
@@ -35,7 +42,7 @@ function MazeViz(maze::Maze, height::Int, width::Int)
     #Herausfinden wo Wände und wo conected, und je nachdem dann Wände rauslöschen
     for i in 1:n
         for j in 1:m
-            if matrix[j,i] == 'o'
+            if matrix[j,i] == 'o' || matrix[j,i] == 'S' || matrix[j,i] == 'T' 
                 i_durch_2::Int = i/2                                                            #von width
                 j_durch_2::Int = j/2                                                            #von height
                 nachbarn::Vector{Tuple{Int, Int}} = maze.nodes[j_durch_2, i_durch_2].conected
@@ -66,7 +73,20 @@ function MazeViz(maze::Maze, height::Int, width::Int)
     return MazeViz(matrix)
 end
 
-
+function show_path(maze::Maze, visual::MazeViz)
+    maze.path[1]
+    
+end
+#=function show_path(visual::MazeViz, maze::Maze)
+    pfad::Vector{Tuple{Int, Int}} = []
+    if typeof(maze.path) != Nothing
+        laenge = length(maze.path)
+        for i in 1:length(maze.path)
+            append!(pfad, maze.path[i])
+        end
+    end
+    return pfad 
+end=#
 
 function print_maze(maze2::MazeViz)
     for i in 1:size(maze2.matrix, 1)
@@ -75,9 +95,19 @@ function print_maze(maze2::MazeViz)
 end
 
 
-test = maze(2,3)
-println(test)
+#test = maze(3,3)
+#pfad = solve(test)
+#println(test.start)
+#println(test.target)
+#println(test.nodes)
+#println(test.path)
+#println(test)
 #lösungi = solve(test)
 #println(lösungi)
-d = MazeViz(test , 2,3)
+test = maze(3,3)
+labyrinth = MazeViz(test, 3,3)
+lösung = solve(test)
+weg = show_path(test,labyrinth)
 print_maze(d)
+#testii = show_path(d, test)
+#println(testii)
