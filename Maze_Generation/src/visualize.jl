@@ -49,7 +49,7 @@ function MazeViz(maze::Maze)
             if matrix[j,i] == 'o' || matrix[j,i] == 'S' || matrix[j,i] == 'T' 
                 i_durch_2::Int = i/2                                                            #von width
                 j_durch_2::Int = j/2                                                            #von height
-                nachbarn::Vector{Tuple{Int, Int}} = maze.nodes[j_durch_2, i_durch_2].conected
+                nachbarn::Vector{Tuple{Int, Int}} = copy(maze.nodes[j_durch_2, i_durch_2].conected)
                 if typeof(nachbarn) != Nothing
                     while length(nachbarn) >= 1
                         (y,x) = nachbarn[1]
@@ -112,7 +112,7 @@ function Base.show(io::IO, maze::Maze)
 end
 
 
-
+##############
 #test = maze(5,5)
 #pfadii = solve(test)
 #MazeViz(test)
