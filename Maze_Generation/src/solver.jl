@@ -1,6 +1,3 @@
-#include("core.jl")
-#include("MazeGeneration.jl")
-
 #= Falls keine Start- und Endpunkte vorgegeben werden, werden hier die Start und Endpunkte 
 aus der Generierung des Labyrinths gewählt und an die Funktion zum Finden des kürzesten Weges übergeben
 =#
