@@ -5,6 +5,7 @@ include("src/solver.jl")
 
 function maze(height::Int,width::Int)
     @assert width*height > 1 "a single field is a boring maze..."
+    #@assert width > 1 && height > 1 "a line is a boring maze..."
     #generate matrix with nodes whose position are the respective coordinates
     maze = [Node((i,j)) for i=1:height, j=1:width]
     start::Node = rand(maze)
