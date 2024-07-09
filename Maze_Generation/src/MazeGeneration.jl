@@ -1,5 +1,3 @@
-#include("core.jl")
-
 #recursive function for the matrix generation of the maze based on random depth-first search
 function generate_matrix(current::Node, visited::Vector{Tuple{Int,Int}}, maze, size::Tuple{Int,Int})
     i,j = current.pos
@@ -16,8 +14,8 @@ function generate_matrix(current::Node, visited::Vector{Tuple{Int,Int}}, maze, s
     push!(visited,next.pos)
     deleteat!(posibilities, rand_index)
     #adding reachability to node.connected of the respective nodes
-    push!(maze[i,:][j].conected, next.pos)
-    push!(maze[i_,:][j_].conected, current.pos)
+    push!(maze[i,j].conected, next.pos)
+    push!(maze[i_,j_].conected, current.pos)
     #traverse deeper
     generate_matrix(next, visited, maze, size)
 
@@ -34,8 +32,8 @@ function generate_matrix(current::Node, visited::Vector{Tuple{Int,Int}}, maze, s
     push!(visited,next.pos)
     deleteat!(posibilities, rand_index)
 
-    push!(maze[i,:][j].conected, next.pos)
-    push!(maze[i_,:][j_].conected, current.pos)
+    push!(maze[i,j].conected, next.pos)
+    push!(maze[i_,j_].conected, current.pos)
     
     generate_matrix(next, visited, maze, size)
 
