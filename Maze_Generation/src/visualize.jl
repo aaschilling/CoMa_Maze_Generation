@@ -7,7 +7,9 @@ mutable struct MazeViz
     matrix::Matrix{Char}  
 end
 
-function MazeViz(maze::Maze, height::Int, width::Int)
+function MazeViz(maze::Maze)
+    width = length(maze.nodes[1,:])
+    height = length(maze.nodes[:,1])
     #Matrix mit richtiger Größe und alle als '+' erstellen
     n = 2*width+1
     m = 2*height+1
@@ -104,9 +106,6 @@ function MazeViz(maze::Maze, height::Int, width::Int)
 end
 
 
-#=function show_path(visual::MazeViz, maze::Maze)
-end=#
-
 function print_maze(maze2::MazeViz)
     for i in 1:size(maze2.matrix, 1)
         println(String(maze2.matrix[i, :]))
@@ -120,7 +119,7 @@ pfadii = solve(test)
 #println(test.target)
 #println(test.nodes)
 #println(test.path)
-print_maze(MazeViz(test, 10,10))
+print_maze(MazeViz(test))
 #println(test.path[1].pos)
 #println(length(test.path))
 #println(pfad[1])
