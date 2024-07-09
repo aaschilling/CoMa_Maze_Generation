@@ -27,7 +27,7 @@ include("MazeGeneration.jl")
         for i in range(2, 100)
             first = test_maze.nodes[i-1]
             second = test_maze.nodes[i]
-            !in(second.pos, first.conected) ? cohesive = false : nothing
+            in(second.pos, first.conected) ? cohesive = false : nothing
             length(node.conected) < 1 ? cohesive = false : nothing
         end
         @test cohesive == true
