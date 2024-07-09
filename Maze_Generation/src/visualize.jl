@@ -114,13 +114,13 @@ function print_maze(maze2::MazeViz)
 end
 
 
-test = maze(3,3)
+test = maze(10,10)
 pfadii = solve(test)
 #println(test.start)
 #println(test.target)
 #println(test.nodes)
 #println(test.path)
-print_maze(MazeViz(test, 3,3))
+print_maze(MazeViz(test, 10,10))
 #println(test.path[1].pos)
 #println(length(test.path))
 #println(pfad[1])
