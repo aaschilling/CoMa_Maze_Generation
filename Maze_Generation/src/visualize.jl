@@ -100,11 +100,12 @@ function MazeViz(maze::Maze)
         popfirst!(pfad)
     end
     maze.visual = MazeViz(matrix)
-    return MazeViz(matrix)
+    #return MazeViz(matrix)
 end
 
 
-function Base.show(io::IO, maze2::MazeViz)
+function Base.show(io::IO, maze::Maze)
+    maze2 = maze.visual
     for i in 1:size(maze2.matrix, 1)
         println(io, String(maze2.matrix[i, :]))
     end
