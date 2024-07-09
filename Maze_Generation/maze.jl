@@ -17,5 +17,8 @@ function maze(height::Int,width::Int)
     while start == target
         target = rand(maze)
     end
-   return Maze(maze,start,target, MazeViz(maze),solve(maze,start,target))
+    Labyrinth = Maze(maze,start,target, nothing, nothing)
+    solve(Labyrinth)
+    MazeViz(Labyrinth)
+    #return Labyrinth
 end
