@@ -106,6 +106,12 @@ function MazeViz(maze::Maze)
 end
 
 
+function Base.show(maze2::MazeViz)
+    for i in 1:size(maze2.matrix, 1)
+        println(String(maze2.matrix[i, :]))
+    end
+end
+
 function print_maze(maze2::MazeViz)
     for i in 1:size(maze2.matrix, 1)
         println(String(maze2.matrix[i, :]))
@@ -113,13 +119,15 @@ function print_maze(maze2::MazeViz)
 end
 
 
-test = maze(10,10)
+test = maze(5,5)
 pfadii = solve(test)
+Base.show(MazeViz(test))
+#print_maze(MazeViz(test))
 #println(test.start)
 #println(test.target)
 #println(test.nodes)
 #println(test.path)
-print_maze(MazeViz(test))
+#Base.show(MazeViz(test))
 #println(test.path[1].pos)
 #println(length(test.path))
 #println(pfad[1])
