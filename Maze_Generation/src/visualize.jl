@@ -106,22 +106,17 @@ function MazeViz(maze::Maze)
 end
 
 
-function Base.show(maze2::MazeViz)
+function Base.show(io::IO, maze2::MazeViz)
     for i in 1:size(maze2.matrix, 1)
-        println(String(maze2.matrix[i, :]))
+        println(io, String(maze2.matrix[i, :]))
     end
 end
 
-function print_maze(maze2::MazeViz)
-    for i in 1:size(maze2.matrix, 1)
-        println(String(maze2.matrix[i, :]))
-    end
-end
 
 
 test = maze(5,5)
 pfadii = solve(test)
-Base.show(MazeViz(test))
+MazeViz(test)
 #print_maze(MazeViz(test))
 #println(test.start)
 #println(test.target)
