@@ -1,11 +1,4 @@
-include("core.jl")
-mutable struct Maze
-    nodes::Matrix{Node}
-    start::Node
-    target::Node
-    visual::Union{MazeViz, Nothing}
-    path::Union{Vector{Node}, Nothing}
-end
+#include("core.jl")
 
 #recursive function for the matrix generation of the maze based on random depth-first search
 function generate_matrix(current::Node, visited::Vector{Tuple{Int,Int}}, maze, size::Tuple{Int,Int})
