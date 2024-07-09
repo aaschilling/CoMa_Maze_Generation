@@ -85,7 +85,7 @@ function solve(maze::Maze, start::Tuple, target::Tuple)
         else
             pos, new_pos = new_pos, pos
             if pos != target
-                # durch das Umdrehen wird die Logig des Pfadverfolgens durcheinander gebracht, weswegen die Position hier 
+                # durch das Umdrehen wird die Logik des Pfadverfolgens durcheinander gebracht, weswegen die Position hier 
                 #schon einmal eingespeichert wird, damit sie am Anfang der Schleife gelöscht und nicht gespeichert wird.
                 push!(path, pos) 
             end
