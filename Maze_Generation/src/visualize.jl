@@ -102,6 +102,7 @@ function MazeViz(maze::Maze)
         end
         popfirst!(pfad)
     end
+    maze.visual = MazeViz(matrix)
     return MazeViz(matrix)
 end
 
