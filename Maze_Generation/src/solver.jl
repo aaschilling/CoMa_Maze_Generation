@@ -56,7 +56,9 @@ function solve(maze::Maze, start::Tuple, target::Tuple)
             pos, new_pos = new_pos, maze.nodes[left[1], left[2]]
         else
             pos, new_pos = new_pos, pos
-            push!(path, pos)
+            if pos != target
+                push!(path, pos)
+            end
         end
     end
     push!(path, pos)
