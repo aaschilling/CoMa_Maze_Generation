@@ -44,7 +44,7 @@ function solve(maze::Maze, start::Tuple, target::Tuple)
             pop!(path)
         end    
 
-        #= Durch den Vergleich der Indizes von pos und new_pos wird die Bewegungsrichtung "Richting" definiert.
+        #= Durch den Vergleich der Indizes von pos und new_pos wird die Bewegungsrichtung "richtung" definiert.
         In Abhängigkeit der Richtung wird dann die Node die rechts, geradeaus und links definiert.
         =#
         if pos.pos[1] != new_pos.pos[1]
@@ -85,7 +85,7 @@ function solve(maze::Maze, start::Tuple, target::Tuple)
         else
             pos, new_pos = new_pos, pos
             if pos != target
-                # durch das Umdrehen wird die Logig des Pfadverfolgens durcheinander gebracht, weswegen die Position hier 
+                # durch das Umdrehen wird die Logik des Pfadverfolgens durcheinander gebracht, weswegen die Position hier 
                 #schon einmal eingespeichert wird, damit sie am Anfang der Schleife gelöscht und nicht gespeichert wird.
                 push!(path, pos) 
             end
@@ -96,6 +96,6 @@ function solve(maze::Maze, start::Tuple, target::Tuple)
 
     # Der Pfad wird im Objekt "maze", also dem Labyrinth gespeichert
     maze.path = path
-    
+
     return path
 end
