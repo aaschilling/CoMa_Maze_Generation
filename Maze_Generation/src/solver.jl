@@ -44,8 +44,9 @@ function solve(maze::Maze, start::Tuple, target::Tuple)
             pop!(path)
         end    
 
-        # Durch den Vergleich der Indizes von pos und new_pos wird die Bewegungsrichtung "Richting" definiert.
-        # In Abhängigkeit der Richtung wird dann die Node die rechts, geradeaus und links definiert.
+        #= Durch den Vergleich der Indizes von pos und new_pos wird die Bewegungsrichtung "Richting" definiert.
+        In Abhängigkeit der Richtung wird dann die Node die rechts, geradeaus und links definiert.
+        =#
         if pos.pos[1] != new_pos.pos[1]
             richtung = pos.pos[1] - new_pos.pos[1] 
             if richtung < 0
@@ -71,6 +72,10 @@ function solve(maze::Maze, start::Tuple, target::Tuple)
             end
         end
 
+        #= Nun wird in Reihnflge geschaut, ob rechts, geradeaus oder links möglich ist, indem die Verbidungsknoten von new_pos überprüft werden.
+        Sollte der Knoten existieren, die pos zu new_pos und new_pos zum gerade gefundenen Knoten.
+        Sonst haben wir eine Sackgasse erreicht und gehen wieder rückwärts, indem pos und new_pos tauschen.
+        =# 
         if in(right, new_pos.conected)
             pos, new_pos = new_pos, maze.nodes[right[1], right[2]]
         elseif in(forward, new_pos.conected)
@@ -80,11 +85,17 @@ function solve(maze::Maze, start::Tuple, target::Tuple)
         else
             pos, new_pos = new_pos, pos
             if pos != target
-                push!(path, pos)
+                # durch das Umdrehen wird die Logig des Pfadverfolgens durcheinander gebracht, weswegen die Position hier 
+                #schon einmal eingespeichert wird, damit sie am Anfang der Schleife gelöscht und nicht gespeichert wird.
+                push!(path, pos) 
             end
         end
     end
+    # Da der Endknoten noch nicht im Pfad eingespeichert werden konnte, da abgebrochen wurde, muss der letzte Knoten noch eingespeichert werden.
     push!(path, pos)
+
+    # Der Pfad wird im Objekt "maze", also dem Labyrinth gespeichert
     maze.path = path
+    
     return path
 end
