@@ -115,9 +115,9 @@ end
 
 
 
-test = maze(5,5)
-pfadii = solve(test)
-MazeViz(test)
+#test = maze(5,5)
+#pfadii = solve(test)
+#MazeViz(test)
 #print_maze(MazeViz(test))
 #println(test.start)
 #println(test.target)
