@@ -18,7 +18,7 @@ function maze(height::Int,width::Int)
         target = rand(maze)
     end
     Labyrinth = Maze(maze,start,target, nothing, nothing)
-    solve(Labyrinth)
-    MazeViz(Labyrinth)
-    #return Labyrinth
+    solve(Labyrinth);
+    MazeViz(Labyrinth);
+    Labyrinth = Labyrinth;
 end
