@@ -1,3 +1,5 @@
+#Das ist ein Checkpoint
+
 include("MazeGeneration.jl")
 include("core.jl")
 include("solver.jl")
