@@ -1,11 +1,8 @@
 #Das ist ein Checkpoint
 
-include("MazeGeneration.jl")
-include("core.jl")
-include("solver.jl")
-mutable struct MazeViz
-    matrix::Matrix{Char}  
-end
+#include("MazeGeneration.jl")
+#include("core.jl")
+#include("solver.jl")
 
 function MazeViz(maze::Maze)
     width = length(maze.nodes[1,:])
@@ -115,9 +112,9 @@ end
 
 
 
-test = maze(5,5)
-pfadii = solve(test)
-MazeViz(test)
+#test = maze(5,5)
+#pfadii = solve(test)
+#MazeViz(test)
 #print_maze(MazeViz(test))
 #println(test.start)
 #println(test.target)
