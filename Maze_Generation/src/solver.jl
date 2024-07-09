@@ -2,11 +2,16 @@ include("core.jl")
 include("MazeGeneration.jl")
 
 function solve(maze::Maze)
-    path = Vector{Node}()
     start = maze.start.pos
-    ziel = maze.target.pos
+    target = maze.target.pos
+    
+    return solve(maze, start, target)
+end
+
+function solve(maze::Maze, start::Tuple, target::Tuple)
+    path = Vector{Node}()
     pos = maze.nodes[start[1], start[2]]
-    target = maze.nodes[ziel[1], ziel[2]]
+    target = maze.nodes[target[1], target[2]]
     next = rand(maze.start.conected)
     new_pos = maze.nodes[next[1], next[2]]
 
