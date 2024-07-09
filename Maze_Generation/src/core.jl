@@ -1,3 +1,5 @@
+
+#include("visualize.jl")
 mutable struct Node
     pos::Tuple{Int, Int}
     conected::Union{Vector{Tuple{Int, Int}}, Nothing}
@@ -22,4 +24,16 @@ function neighbours(node::Node,visited::Vector{Tuple{Int,Int}},size::Tuple{Int,I
     node.pos[2]-1 >= 1 && !((node.pos[1],node.pos[2]-1) in visited) ? push!(neighbours, Node((node.pos[1],node.pos[2]-1))) : nothing
     node.pos[2]+1 <= height && !((node.pos[1],node.pos[2]+1) in visited) ? push!(neighbours, Node((node.pos[1],node.pos[2]+1))) : nothing
     return neighbours
+end
+
+mutable struct MazeViz
+    matrix::Matrix{Char}
+end
+
+mutable struct Maze
+    nodes::Matrix{Node}
+    start::Node
+    target::Node
+    visual::Union{MazeViz, Nothing}
+    path::Union{Vector{Node}, Nothing}
 end
