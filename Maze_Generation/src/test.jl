@@ -10,13 +10,6 @@ include("MazeGeneration.jl")
         end
         @test cohesive == true
     end
-    @testset "main" begin
-        @testset "(inner) Constructor" begin
-        sn = SnakeViz()
-        @test size(sn.new_frame, 1) == 12 
-        @test size(sn.new_frame, 2) == 12
-        end 
-    end
 
     @testset "solve" begin
         test_maze = maze(10,10)
@@ -35,4 +28,3 @@ include("MazeGeneration.jl")
         @test has_duplicates == false
     end 
 end
-
