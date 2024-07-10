@@ -17,7 +17,7 @@ function MazeViz(maze::Maze)
             if i % 2 == 0 && j % 2 == 0
                 matrix[j,i] = 'o'
             end
-            #Außenwände shöner in dem sie jeweilige Striche sind
+            #Außenwände shöner in dem sie die jeweilige Striche sind
             if j == 1 && i != 1 && i != n
                 matrix[j,i] = '-'
             elseif j == m && i != 1 && i != n
@@ -26,7 +26,7 @@ function MazeViz(maze::Maze)
                 matrix[j,i] = '|'
             elseif i == n && j != 1 && j!= m
                 matrix[j,i] = '|'
-            #Wände schöner machen in gleicher for Schleife
+            #Innenwände auch schöner machen
             elseif j % 2 == 1 && i % 2 == 0
                 matrix[j,i] = '-'
             elseif j % 2 == 0 && i % 2 == 1
@@ -74,6 +74,7 @@ function MazeViz(maze::Maze)
             end
         end
     end
+    #den Pfad der in solve gefunden wird einzeichnen
     pfad = [node.pos for node in maze.path]
     while length(pfad) > 1
         if pfad[1] != pfad[2]
@@ -103,7 +104,7 @@ function MazeViz(maze::Maze)
     #return MazeViz(matrix)
 end
 
-
+#überladen der show Funktion
 function Base.show(io::IO, maze::Maze)
     maze2 = maze.visual
     for i in 1:size(maze2.matrix, 1)
